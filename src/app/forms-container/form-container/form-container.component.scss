@@ -1,0 +1,21 @@
+.login-signup-form-container {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: black;
+
+  .form-container {
+    position: absolute;
+    transition: all 0.5s linear;
+    //right: 0;
+    &.position-initial {
+      right: -600px;
+    }
+
+    &.slide {
+      right: 0;
+    }
+  }
+}

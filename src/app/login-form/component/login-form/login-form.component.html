@@ -1,0 +1,40 @@
+<ng-container *ngIf="renderComponent">
+  <div
+    [ngClass]="openForm?'right-0':''"
+    class="login-signup-form-container w-400 position-absolute " >
+    <form class="login-signup-form p-10" (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+      <!-- Login Form -->
+      <p class="form-heading cursor-default">Welcome to MM!</p>
+      <ng-container *ngIf="isLoginForm; else signUpTemplate">
+        <input id="loginEmail" class="pass-input-container display-block h-45 position-relative br-10 pl-5 mt-30" formControlName="email" type="email"
+               placeholder="Enter your email"/>
+
+        <div class="pass-input-container display-block h-45 position-relative br-10 pl-5 mt-30">
+          <input class="pass-input border-none br-5" id="loginPassword" formControlName="password" type="{{showPassword?'text':'password'}}"
+                 placeholder="Enter your password"/>
+          <mat-icon
+            (click)="toggleShowPassword()"
+            [fontIcon]="showPassword?'visibility_off':'visibility'"
+            class="visibility-icon position-absolute w-20 h-20 cursor-pointer"
+          >
+          </mat-icon>
+          <!--        <img class="pass-hide-view-icon " src="assets/images/icons/hide-pass.png">-->
+        </div>
+        <input type="submit" class="submit-btn mt-20 cursor-pointer border-none br-10 h-45" [disabled]="!loginForm.valid"
+               value="Log in">
+      </ng-container>
+    </form>
+    <div class="login-signup-text-container pl-10">
+      <p class="login-signup-text"> {{isLoginForm? 'Not a user':'Already a user'}}? <span (click)="onFormSwitchClick()" class="cursor-pointer">{{!isLoginForm?'Login':'Signup'}}</span> </p>
+    </div>
+  </div>
+
+</ng-container>
+
+<ng-template #signUpTemplate>
+  <input id="signupEmail" formControlName="email" type="email" placeholder="Enter your email"/>
+  <input id="signupPassword" formControlName="password" type="password" placeholder="Enter your password"/>
+  <input id="confirmPassword" formControlName="confirmPassword" type="password"
+         placeholder="Confirm your password"/>
+  <input type="submit" class="submit-btn" [disabled]="!loginForm.valid" value="Sign Up">
+</ng-template>

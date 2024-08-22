@@ -1,0 +1,163 @@
+@mixin height-classes($min, $max) {
+  @for $i from $min through $max {
+    .h-#{$i} {
+      height: #{$i}px;
+    }
+  }
+}
+
+@mixin width-classes($min, $max) {
+  @for $i from $min through $max {
+    .w-#{$i} {
+      width: #{$i}px;
+    }
+  }
+}
+
+@mixin padding-classes($min, $max) {
+  @for $i from $min through $max {
+    .p-#{$i} {
+      padding: #{$i}px;
+    }
+  }
+}
+
+@mixin padding-top-classes($min, $max) {
+  @for $i from $min through $max {
+    .pt-#{$i} {
+      padding-top: #{$i}px;
+    }
+  }
+}
+
+@mixin padding-bottom-classes($min, $max) {
+  @for $i from $min through $max {
+    .pb-#{$i} {
+      padding-bottom: #{$i}px;
+    }
+  }
+}
+
+@mixin padding-left-classes($min, $max) {
+  @for $i from $min through $max {
+    .pl-#{$i} {
+      padding-left: #{$i}px;
+    }
+  }
+}
+
+@mixin padding-right-classes($min, $max) {
+  @for $i from $min through $max {
+    .pr-#{$i} {
+      padding-right: #{$i}px;
+    }
+  }
+}
+
+@mixin border-radius-classes($min, $max) {
+  @for $i from $min through $max {
+    .br-#{$i} {
+      border-radius: #{$i}px;
+    }
+  }
+}
+
+@mixin margin-classes($min, $max) {
+  @for $i from $min through $max {
+    .m-#{$i} {
+      margin: #{$i}px;
+    }
+  }
+}
+
+@mixin margin-top-classes($min, $max) {
+  @for $i from $min through $max {
+    .mt-#{$i} {
+      margin-top: #{$i}px;
+    }
+  }
+}
+
+@mixin margin-bottom-classes($min, $max) {
+  @for $i from $min through $max {
+    .mb-#{$i} {
+      margin-bottom: #{$i}px;
+    }
+  }
+}
+
+@mixin margin-left-classes($min, $max) {
+  @for $i from $min through $max {
+    .ml-#{$i} {
+      margin-left: #{$i}px;
+    }
+  }
+}
+
+@mixin margin-right-classes($min, $max) {
+  @for $i from $min through $max {
+    .mr-#{$i} {
+      margin-right: #{$i}px;
+    }
+  }
+}
+
+@include height-classes(4, 800);
+@include width-classes(4, 800);
+@include padding-classes(4, 200);
+@include padding-top-classes(4, 200);
+@include padding-bottom-classes(4, 200);
+@include padding-left-classes(4, 200);
+@include padding-right-classes(4, 200);
+@include border-radius-classes(1, 40);
+@include margin-classes(4, 800);
+@include margin-top-classes(4, 800);
+@include margin-bottom-classes(4, 800);
+@include margin-left-classes(4, 800);
+@include margin-right-classes(4, 800);
+
+// Utility classes
+.flex-row {
+  display: flex;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.justify-content-space-b {
+  justify-content: space-between;
+}
+
+.align-i-center {
+  align-items: center;
+}
+
+.display-block {
+  display: block;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.position-relative {
+  position: relative;
+}
+
+.position-absolute {
+  position: absolute;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.cursor-default {
+  cursor: default;
+}
+
+.border-none {
+  border: none;
+}

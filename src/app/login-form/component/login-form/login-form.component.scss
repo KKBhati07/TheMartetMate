@@ -1,0 +1,96 @@
+.login-signup-form-container {
+  top: 0;
+  //right: -400px;
+  right: 0;
+  height: 100vh;
+  border-bottom-left-radius: 20px;
+  border-top-left-radius: 20px;
+  background-color: #707070;
+  //transition: all 0.5s linear;
+
+  &.right-0{
+    //right: 0 !important ;
+  }
+  //&.right-400{
+  //  right: -400px;
+  //}
+
+  .login-signup-form {
+    width: 100%;
+    margin-top: 20vh;
+
+    .form-heading {
+      font-size: 2rem;
+      text-align: center;
+      color: var(--primaryColor);
+      font-weight: 800;
+    }
+
+    .pass-input-container {
+      border: 1px solid var(--borderColor);
+      background-color: #f7f7f7;
+      outline: none;
+      width: 100%;
+
+      &:hover {
+        border: 1px solid var(--hoverColor);
+      }
+
+      &:focus {
+        border: 1px solid var(--hoverColor);
+      }
+
+      .pass-input {
+        width: 80%;
+        outline: none;
+        height: 100%;
+        background-color: #f7f7f7;
+      }
+
+      .visibility-icon {
+        top: 12.5px;
+        right: 10px;
+        font-size: 20px;
+        color: var(--primaryColor);
+      }
+    }
+
+    .submit-btn {
+      color: white;
+      background-color: var(--primaryColor);
+      font-weight: 700;
+      width: 100%;
+
+      &:hover {
+        border: 2px solid var(--primaryColor);
+        color: var(--primaryColor);
+        font-weight: 800;
+        background-color: white;
+      }
+    }
+  }
+  .login-signup-text-container{
+    .login-signup-text{
+      color: #f7f7f7;
+      span{
+        color: var(--primaryColor);
+        text-decoration: underline;
+        &:hover{
+          color: var(--hoverColor);
+
+        }
+      }
+    }
+  }
+}
+
+
+///* Responsive Styles */
+//@media only screen and (max-width: 768px) {
+//  form {
+//    width: 90vw;
+//  }
+//  form input {
+//    width: 90vw;
+//  }
+//}
