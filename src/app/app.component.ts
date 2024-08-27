@@ -27,7 +27,6 @@ export class AppComponent implements OnInit{
 
   getAuthDetails(){
     this.authService.loadUserDetails().subscribe(data=>{
-      console.warn(data);
     })
   }
 }

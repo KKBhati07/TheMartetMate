@@ -14,8 +14,7 @@ export class ApiService {
 
 private getAuthHeaders():HttpHeaders{
     let headers=new HttpHeaders();
-    // const cookie = this.cookieService.get('sessionid');
-  const cookie = 'A748D620-73DD-4C96-8C06-13C7500877EF'
+    const cookie = this.cookieService.get('sessionid');
     if(cookie) {
       headers= headers.set('sessionid', cookie);
     }
@@ -24,7 +23,6 @@ private getAuthHeaders():HttpHeaders{
 
   get<T>(endpoint: string): Observable<T> {
     const headers = this.getAuthHeaders();
-    console.warn(headers)
     return this.http.get<T>(`${this.baseUrl}${endpoint}`, { headers });
   }
 

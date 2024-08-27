@@ -9,7 +9,6 @@ import {Observable} from "rxjs";
 export class LoginResolver implements Resolve<boolean>{
   constructor(private authService:AuthService,
               private router:Router) {
-    console.warn('Resolver Called!')
   }
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     if(this.authService.Authenticated){

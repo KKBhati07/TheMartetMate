@@ -7,15 +7,13 @@
   background-color: black;
 
   .form-container {
+    right: -600px;
     position: absolute;
-    transition: all 0.5s linear;
-    //right: 0;
-    &.position-initial {
-      right: -600px;
-    }
-
-    &.slide {
-      right: 0;
+    animation: slideIn 0.5s linear 0.5s forwards;
+    @keyframes slideIn {
+      to {
+        right: 0;
+      }
     }
   }
 }

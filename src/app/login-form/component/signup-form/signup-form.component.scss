@@ -8,6 +8,11 @@
   background-color: var(--background-color);
   transition: all 0.5s linear;
 
+  .back-icon-container{
+    .back-icon{
+      color: var(--text-color-disable);
+    }
+  }
   .close-icon-container{
     top: 20px;
     right: 20px;
@@ -72,11 +77,6 @@
       background-color: var(--primary-color);
       font-weight: 700;
       width: 100%;
-
-      &.submit-btn-disabled{
-      background-color: var(--button-color-disable)!important;
-      color: var(--text-color-disable)!important;
-      }
     }
   }
   .login-signup-text-container{
@@ -89,6 +89,30 @@
           color: var(--hover-color);
 
         }
+      }
+    }
+  }
+}
+
+.next-btn-container {
+  justify-content: flex-end;
+
+  .next-btn {
+    border: 1px solid var(--primary-color);
+    //border: 1px solid red;
+    box-sizing: border-box;
+    p{
+      font-weight: 700;
+    }
+
+    &.next-btn-disabled{
+      background-color: var(--button-color-disable)!important;
+      border: none;
+      p{
+        color: var(--text-color-disable);
+      }
+      mat-icon{
+        color: var(--text-color-disable);
       }
     }
   }

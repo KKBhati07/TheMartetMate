@@ -1,7 +1,7 @@
 @mixin height-classes($min, $max) {
   @for $i from $min through $max {
     .h-#{$i} {
-      height: #{$i}px;
+      height: #{$i}px !important; ;
     }
   }
 }
@@ -9,7 +9,7 @@
 @mixin width-classes($min, $max) {
   @for $i from $min through $max {
     .w-#{$i} {
-      width: #{$i}px;
+      width: #{$i}px !important; ;
     }
   }
 }
@@ -17,7 +17,7 @@
 @mixin padding-classes($min, $max) {
   @for $i from $min through $max {
     .p-#{$i} {
-      padding: #{$i}px;
+      padding: #{$i}px !important; ;
     }
   }
 }
@@ -25,7 +25,7 @@
 @mixin padding-top-classes($min, $max) {
   @for $i from $min through $max {
     .pt-#{$i} {
-      padding-top: #{$i}px;
+      padding-top: #{$i}px !important; ;
     }
   }
 }
@@ -33,7 +33,7 @@
 @mixin padding-bottom-classes($min, $max) {
   @for $i from $min through $max {
     .pb-#{$i} {
-      padding-bottom: #{$i}px;
+      padding-bottom: #{$i}px !important; ;
     }
   }
 }
@@ -41,7 +41,7 @@
 @mixin padding-left-classes($min, $max) {
   @for $i from $min through $max {
     .pl-#{$i} {
-      padding-left: #{$i}px;
+      padding-left: #{$i}px !important; ;
     }
   }
 }
@@ -49,7 +49,7 @@
 @mixin padding-right-classes($min, $max) {
   @for $i from $min through $max {
     .pr-#{$i} {
-      padding-right: #{$i}px;
+      padding-right: #{$i}px !important; ;
     }
   }
 }
@@ -57,7 +57,7 @@
 @mixin border-radius-classes($min, $max) {
   @for $i from $min through $max {
     .br-#{$i} {
-      border-radius: #{$i}px;
+      border-radius: #{$i}px !important;
     }
   }
 }
@@ -65,7 +65,7 @@
 @mixin margin-classes($min, $max) {
   @for $i from $min through $max {
     .m-#{$i} {
-      margin: #{$i}px;
+      margin: #{$i}px !important;
     }
   }
 }
@@ -73,7 +73,7 @@
 @mixin margin-top-classes($min, $max) {
   @for $i from $min through $max {
     .mt-#{$i} {
-      margin-top: #{$i}px;
+      margin-top: #{$i}px !important;
     }
   }
 }
@@ -81,7 +81,7 @@
 @mixin margin-bottom-classes($min, $max) {
   @for $i from $min through $max {
     .mb-#{$i} {
-      margin-bottom: #{$i}px;
+      margin-bottom: #{$i}px !important;
     }
   }
 }
@@ -89,7 +89,7 @@
 @mixin margin-left-classes($min, $max) {
   @for $i from $min through $max {
     .ml-#{$i} {
-      margin-left: #{$i}px;
+      margin-left: #{$i}px !important;
     }
   }
 }
@@ -97,7 +97,15 @@
 @mixin margin-right-classes($min, $max) {
   @for $i from $min through $max {
     .mr-#{$i} {
-      margin-right: #{$i}px;
+      margin-right: #{$i}px !important;
+    }
+  }
+}
+
+@mixin font-size-classes($min, $max) {
+  @for $i from $min through $max {
+    .fs-#{$i} {
+      font-size: #{$i}px !important;
     }
   }
 }
@@ -115,6 +123,7 @@
 @include margin-bottom-classes(4, 800);
 @include margin-left-classes(4, 800);
 @include margin-right-classes(4, 800);
+@include font-size-classes(4, 60);
 
 // Utility classes
 .flex-row {
@@ -122,7 +131,7 @@
 }
 
 .justify-content-center {
-  justify-content: center;
+  justify-content: center !important;
 }
 
 .justify-content-space-b {
@@ -160,4 +169,8 @@
 
 .border-none {
   border: none;
+}
+
+.border-circle{
+  border-radius: 50%;
 }

@@ -5,6 +5,7 @@ import {MatInputModule} from "@angular/material/input";
 import {CommonModule} from "@angular/common";
 import {FormContainerComponent} from "../forms-container/form-container/form-container.component";
 import {MatIconModule} from "@angular/material/icon";
+import {SignupFormComponent} from "./component/signup-form/signup-form.component";
 
 export function getLoginContainer() {
   return FormContainerComponent;
@@ -12,14 +13,14 @@ export function getLoginContainer() {
 
 
 @NgModule({
-  declarations:[LoginFormComponent],
+  declarations:[LoginFormComponent, SignupFormComponent],
   imports: [
     ReactiveFormsModule,
     MatInputModule,
     CommonModule,
     MatIconModule
   ],
-  exports:[LoginFormComponent]
+  exports: [LoginFormComponent, SignupFormComponent]
 })
-export class LoginFormModule{
+export class LoginSignupFormModule {
 }

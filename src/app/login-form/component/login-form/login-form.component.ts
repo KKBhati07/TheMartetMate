@@ -1,6 +1,7 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
+import {PasswordValidator} from "../signup-form/validator";
 
 // import { LoginService } from './login.service'; // Adjust the path as necessary
 
@@ -8,82 +9,85 @@ import {ActivatedRoute, Router} from '@angular/router';
   selector: 'mm-login-form',
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.scss'],
-  changeDetection:ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginFormComponent implements OnInit {
-  @Input() isLoginForm=true;
   renderComponent = false;
-  formHeading='Welcome to MM!'
+  formHeading = 'Welcome to MM!'
   showPassword = false;
-  openForm = false;
-  loginForm:FormGroup
+  loginForm: FormGroup;
+  showInvalidEmailText = false;
+  invalidEmailText = '';
+  showInvalidPassText = false;
 
   constructor(
     private fb: FormBuilder,
-    // private loginService: LoginService, // Service for login functionality
     private router: Router,
-    private route:ActivatedRoute,
-    private cdr:ChangeDetectorRef
+    private route: ActivatedRoute,
+    private cdr: ChangeDetectorRef
   ) {
-
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
     });
   }
 
   ngOnInit() {
-    console.warn("Oninit called!")
-    // this.initializeForm();
-    this.setFormHeading();
+
+    this.renderComponent = true;
     this.cdr.markForCheck();
-    this.setFormType();
   }
 
-  setFormType(){
-    this.route.data.subscribe(data=>{
-      this.isLoginForm = data['type'] === 'login';
-      this.renderComponent = true;
-      setTimeout(()=>{this.openForm=true;this.cdr.markForCheck()
-      },500)
-      this.cdr.markForCheck();
-    })
-  }
-
-  toggleShowPassword(){
+  toggleShowPassword() {
     this.showPassword = !this.showPassword;
     this.cdr.markForCheck();
   }
 
-  onFormSwitchClick(){
-    if(this.isLoginForm) this.router.navigate(['auth','user_signup'])
-    else this.router.navigate(['auth','user_login'])
+  onFormSwitchClick() {
+    this.router.navigate(['auth', 'user_signup'])
   }
 
-  setFormHeading(){
-    if(!this.isLoginForm) this.formHeading = 'Sign Up to MM!'
+  closeForm() {
+    this.loginForm.reset();
+    this.router.navigate(['/'])
   }
-  private initializeForm() {
-    this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
-    });
+
+  getEmailValidation(submitBtnValidations = false) {
+    if (submitBtnValidations) {
+      return this.loginForm.get('email')?.hasError('required') ||
+        this.loginForm.get('email')?.hasError('email') ||
+        this.loginForm.get('password')?.hasError('required')
+    }
+    const isEmpty = this.loginForm.get('email')?.hasError('required');
+    const isInvalid = this.loginForm.get('email')?.hasError('email');
+    if (isEmpty) this.invalidEmailText = 'Email is required';
+    else {
+      this.invalidEmailText = 'Invalid email';
+    }
+    this.cdr.markForCheck();
+    return this.loginForm.get('email')?.touched && (isEmpty || isInvalid);
+  }
+
+  getPassValidation() {
+    return this.loginForm.get('password')?.hasError('required') &&
+      this.loginForm.get('password')?.touched
   }
 
   onSubmit() {
-    // if (this.loginForm.valid) {
-    //   const { email, password } = this.loginForm.value;
-    //   this.loginService.login(email, password).subscribe(
-    //     response => {
-    //       // Handle successful login
-    //       console.log('Login successful', response);
-    //       this.router.navigate(['/home']); // Redirect to home or desired route
-    //     },
-    //     error => {
-    //       // Handle login error
-    //       console.error('Login failed', error);
-    //     }
-    //   );
-    // }
+    if (this.loginForm.invalid) {
+      this.handleFormValidationError();
+      return;
+    }
+    const { email, password } = this.loginForm.value;
+    console.log('Email:', email);
+    console.log('Password:', password);
+
+
+
+
+  }
+
+  private handleFormValidationError() {
+
   }
 }

@@ -22,7 +22,6 @@ export class AppHeaderComponent implements OnInit{
       .pipe(
         filter((event) => event instanceof NavigationEnd))
       .subscribe(e => {
-        console.warn('Router Url::',this.router.url);
         if(!this.isAuthenticated){
           if (this.requiresAuthentication(this.router.url)) {
             // this.dialogService.showLoginDialog();
