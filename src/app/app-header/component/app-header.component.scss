@@ -1,0 +1,28 @@
+/* app.component.scss or any other component stylesheet */
+
+::ng-deep .cdk-overlay-container
+::ng-deep .cdk-overlay-container {
+
+}
+
+::ng-deep .cdk-overlay-container {
+
+  .mm-login-dialog-container {
+    /* Style the dialog panel */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 16px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    max-width: 100%; /* Ensure the dialog is responsive */
+  }
+
+
+  .mm-login-dialog-backdrop {
+    width: 100vw;
+    //height: 100vh;
+    /* Style the backdrop */
+    background-color: rgb(0, 0, 0); /* Semi-transparent black */
+  }
+}
