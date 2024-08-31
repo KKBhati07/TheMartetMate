@@ -1,9 +1,7 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
-import {PasswordValidator} from "../signup-form/validator";
-
-// import { LoginService } from './login.service'; // Adjust the path as necessary
+import {AuthService} from "../../../services/auth-service";
 
 @Component({
   selector: 'mm-login-form',
@@ -24,7 +22,8 @@ export class LoginFormComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private authService:AuthService
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -43,7 +42,7 @@ export class LoginFormComponent implements OnInit {
     this.cdr.markForCheck();
   }
 
-  onFormSwitchClick() {
+  navigateToLoginForm() {
     this.router.navigate(['auth', 'user_signup'])
   }
 
@@ -78,11 +77,10 @@ export class LoginFormComponent implements OnInit {
       this.handleFormValidationError();
       return;
     }
-    const { email, password } = this.loginForm.value;
-    console.log('Email:', email);
-    console.log('Password:', password);
-
-
+    const {email, password} = this.loginForm.value;
+    this.authService.loginUser({email, password}).subscribe(res=>{
+    // TODO::Notification Service
+    })
 
 
   }

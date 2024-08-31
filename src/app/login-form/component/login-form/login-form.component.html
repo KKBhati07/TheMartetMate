@@ -34,20 +34,20 @@
       <div class="invalid-text-container h-36 p-20">
         <p *ngIf="getPassValidation()" class="invalid-text fs-12">* Password is required!</p>
       </div>
-
-      <input
-        [ngStyle]="{'backgroundColor':getEmailValidation(true)? 'var(--button-color-disable)':'',
-            'color': getEmailValidation(true)? 'var(--text-color-disable)':''
-          }"
-        type="submit" class="fs-16 submit-btn mt-20 cursor-pointer border-none br-10 h-60"
-        [disabled]="getEmailValidation(true)"
-        value="LOG IN">
+      
+      <mm-button
+        [type]="'submit'"
+        [text]="'LOG IN'"
+        [class]="'h-60 w-100p fs-16'"
+        [iconClass]="'fw-1'"
+        [disabled]=" getEmailValidation(true) || false"
+      ></mm-button>
     </form>
 
-    <div class="login-signup-text-container pl-10">
-      <p class="login-signup-text">
+    <div class="signup-text-container pl-10">
+      <p class="signup-text">
         Not a user?
-        <span (click)="onFormSwitchClick()" class="cursor-pointer">
+        <span (click)="navigateToLoginForm()" class="cursor-pointer">
           Signup
         </span>
       </p>
