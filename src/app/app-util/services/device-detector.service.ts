@@ -8,7 +8,7 @@ import {map, shareReplay} from "rxjs/operators";
   providedIn: 'root'
 })
 export class DeviceDetectorService {
-  private readonly MOBILE_MAX_WIDTH = '(max-width: 480px)';
+  private readonly MOBILE_MAX_WIDTH = '(max-width: 969px)';
 
   constructor(private breakpointObserver: BreakpointObserver,
               private platform: Platform) {

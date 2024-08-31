@@ -1,7 +1,9 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService} from "../../../services/auth-service";
+import {MAT_BOTTOM_SHEET_DATA} from "@angular/material/bottom-sheet";
+import {URLS} from "../../../urls";
 
 @Component({
   selector: 'mm-login-form',
@@ -14,16 +16,15 @@ export class LoginFormComponent implements OnInit {
   formHeading = 'Welcome to MM!'
   showPassword = false;
   loginForm: FormGroup;
-  showInvalidEmailText = false;
   invalidEmailText = '';
-  showInvalidPassText = false;
-
+  isBottomSheet = false
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
     private cdr: ChangeDetectorRef,
-    private authService:AuthService
+    private authService:AuthService,
+    @Inject(MAT_BOTTOM_SHEET_DATA) public data: any
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -32,9 +33,14 @@ export class LoginFormComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.checkForBottomSheet()
     this.renderComponent = true;
     this.cdr.markForCheck();
+  }
+  private checkForBottomSheet() {
+    if(this.data?.openInBottomSheet){
+      this.isBottomSheet = this.data.openInBottomSheet;
+    }
   }
 
   toggleShowPassword() {
@@ -43,7 +49,7 @@ export class LoginFormComponent implements OnInit {
   }
 
   navigateToLoginForm() {
-    this.router.navigate(['auth', 'user_signup'])
+    this.router.navigate([URLS.AUTH.SIGNUP.split('/')])
   }
 
   closeForm() {

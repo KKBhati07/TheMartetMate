@@ -1,16 +1,21 @@
 import {Component, OnInit} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-// import {AuthService}
 import {AuthService} from "./services/auth-service";
 import {HttpClientModule} from "@angular/common/http";
 import {AppHeaderModule} from "./app-header/app-header.module";
 import {FormsContainerModule} from "./forms-container/forms-container.module";
+import {MAT_BOTTOM_SHEET_DATA} from "@angular/material/bottom-sheet";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HttpClientModule, AppHeaderModule,FormsContainerModule],
-  providers:[HttpClientModule],
+  imports: [
+    RouterOutlet, HttpClientModule, AppHeaderModule,
+    FormsContainerModule,
+  ],
+  providers: [
+    { provide: MAT_BOTTOM_SHEET_DATA, useValue: {} }
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -20,9 +25,7 @@ export class AppComponent implements OnInit{
   constructor(private authService:AuthService) {
   }
   ngOnInit() {
-
     this.getAuthDetails();
-
   }
 
   getAuthDetails(){
