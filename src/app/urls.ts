@@ -1,9 +1,8 @@
 export const URLS = {
   HOME: '/',
   AUTH: {
-    LOGIN: 'auth/login_user',
-    SIGNUP: 'auth/signup_user',
-
+    LOGIN: 'auth/user_login',
+    SIGNUP: 'auth/user_signup',
   },
   API: {
     V1: {

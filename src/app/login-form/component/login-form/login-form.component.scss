@@ -1,9 +1,6 @@
 .login-signup-form-container-i {
   top: 0;
   border: 1px solid rgba(0, 0, 0, 0);
-  width: 600px;
-  height: 100vh;
-  border-bottom-left-radius: 20px;
   border-top-left-radius: 20px;
   background-color: var(--background-color);
   transition: all 0.5s linear;
@@ -94,13 +91,6 @@
   }
 }
 
+@media only screen and (max-width: 969px) {
 
-///* Responsive Styles */
-//@media only screen and (max-width: 768px) {
-//  form {
-//    width: 90vw;
-//  }
-//  form input {
-//    width: 90vw;
-//  }
-//}
+}

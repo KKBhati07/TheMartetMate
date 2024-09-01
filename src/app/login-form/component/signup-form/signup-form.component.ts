@@ -1,10 +1,11 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Input} from "@angular/core";
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, Input} from "@angular/core";
 import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {PasswordValidator} from "./validator";
 import {ErrorText, Signup} from "../../../models/login-signup.model";
 import {AuthService} from "../../../services/auth-service";
 import {URLS} from "../../../urls";
+import {MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef} from "@angular/material/bottom-sheet";
 
 @Component({
   selector: "mm-signup-form",
@@ -21,13 +22,16 @@ export class SignupFormComponent {
   step = 1;
   formData: Signup | undefined;
   errorText: ErrorText = {}
+  isBottomSheet = false;
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
     private cdr: ChangeDetectorRef,
-    private authService: AuthService
+    private authService: AuthService,
+    private bsr: MatBottomSheetRef,
+    @Inject(MAT_BOTTOM_SHEET_DATA) public data: {openInBottomSheet:boolean},
   ) {
     this.signUpForm = this.fb.group({
       name: ['', [Validators.required]],
@@ -38,8 +42,15 @@ export class SignupFormComponent {
   }
 
   ngOnInit() {
+    this.checkForBottomSheet()
     this.renderComponent = true;
     this.cdr.markForCheck();
+  }
+
+  private checkForBottomSheet() {
+    if(this.data?.openInBottomSheet){
+      this.isBottomSheet = this.data.openInBottomSheet;
+    }
   }
 
   toggleShowPassword() {
@@ -49,7 +60,7 @@ export class SignupFormComponent {
 
   closeForm() {
     this.signUpForm.reset();
-    this.router.navigate([URLS.HOME])
+    this.router.navigate([URLS.HOME]).then(r=>null)
   }
 
   onNextClick() {

@@ -7,7 +7,8 @@ import {BottomSheetPillComponent} from "./component/bottomsheet-pill/bottomsheet
 @NgModule({
   declarations: [AppButtonComponent,BottomSheetPillComponent],
   exports: [
-    AppButtonComponent
+    AppButtonComponent,
+    BottomSheetPillComponent
   ],
   imports: [CommonModule, MatIcon]
 })

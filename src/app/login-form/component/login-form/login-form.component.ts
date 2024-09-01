@@ -1,9 +1,10 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, Input, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService} from "../../../services/auth-service";
-import {MAT_BOTTOM_SHEET_DATA} from "@angular/material/bottom-sheet";
+import {MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef} from "@angular/material/bottom-sheet";
 import {URLS} from "../../../urls";
+import {Subject, takeUntil} from "rxjs";
 
 @Component({
   selector: 'mm-login-form',
@@ -11,20 +12,22 @@ import {URLS} from "../../../urls";
   styleUrls: ['./login-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LoginFormComponent implements OnInit {
+export class LoginFormComponent implements OnInit, OnDestroy {
   renderComponent = false;
   formHeading = 'Welcome to MM!'
   showPassword = false;
   loginForm: FormGroup;
   invalidEmailText = '';
   isBottomSheet = false
+  destroy$:Subject<boolean> = new Subject<boolean>();
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
     private cdr: ChangeDetectorRef,
     private authService:AuthService,
-    @Inject(MAT_BOTTOM_SHEET_DATA) public data: any
+    @Inject(MAT_BOTTOM_SHEET_DATA) public data: {openInBottomSheet:boolean},
+    private bsr:MatBottomSheetRef
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -37,6 +40,7 @@ export class LoginFormComponent implements OnInit {
     this.renderComponent = true;
     this.cdr.markForCheck();
   }
+
   private checkForBottomSheet() {
     if(this.data?.openInBottomSheet){
       this.isBottomSheet = this.data.openInBottomSheet;
@@ -49,12 +53,16 @@ export class LoginFormComponent implements OnInit {
   }
 
   navigateToLoginForm() {
-    this.router.navigate([URLS.AUTH.SIGNUP.split('/')])
+    if(this.isBottomSheet){
+      this.bsr?.dismiss('redirect_to_signup');
+    }else{
+      this.router.navigate(URLS.AUTH.SIGNUP.split('/')).then(r => null);
+    }
   }
 
   closeForm() {
     this.loginForm.reset();
-    this.router.navigate(['/'])
+    this.router.navigate([URLS.HOME]).then(r => null);
   }
 
   getEmailValidation(submitBtnValidations = false) {
@@ -84,7 +92,7 @@ export class LoginFormComponent implements OnInit {
       return;
     }
     const {email, password} = this.loginForm.value;
-    this.authService.loginUser({email, password}).subscribe(res=>{
+    this.authService.loginUser({email, password}).pipe(takeUntil(this.destroy$)).subscribe(res=>{
     // TODO::Notification Service
     })
 
@@ -94,4 +102,11 @@ export class LoginFormComponent implements OnInit {
   private handleFormValidationError() {
 
   }
+
+  ngOnDestroy(){
+    console.warn('OnDestroy Called')
+    this.destroy$.next(true);
+    this.destroy$.complete();
+  }
+
 }

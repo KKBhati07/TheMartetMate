@@ -2,9 +2,10 @@
      [ngClass]="isMobile? '':'slide-in'"
 >
   <div class="left-section"></div>
+  <ng-container *ngIf="!isMobile">
   <div class="form-container" [ngClass]="slideFrom ? 'slide' : ''">
 
-    <ng-container *ngIf="!isMobile">
+
 
 
       <ng-container *ngIf="isLoginForm">
@@ -13,6 +14,7 @@
       <ng-container *ngIf="!isLoginForm">
         <mm-signup-form></mm-signup-form>
       </ng-container>
-    </ng-container>
+
   </div>
+  </ng-container>
 </div>
