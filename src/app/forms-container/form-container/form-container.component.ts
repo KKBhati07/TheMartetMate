@@ -31,9 +31,6 @@ export class FormContainerComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.setFormType();
     this.setISMobile();
-    this.bsr?.afterDismissed().subscribe(action=>{
-      console.log('Called!',action);
-    })
   }
 
   private setFormType() {
