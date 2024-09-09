@@ -62,7 +62,7 @@ export class LoginFormComponent implements OnInit, OnDestroy {
 
   closeForm() {
     this.loginForm.reset();
-    this.router.navigate([URLS.HOME]).then(r => null);
+    this.router.navigate([URLS.ROOT]).then(r => null);
   }
 
   getEmailValidation(submitBtnValidations = false) {
@@ -104,7 +104,6 @@ export class LoginFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(){
-    console.warn('OnDestroy Called')
     this.destroy$.next(true);
     this.destroy$.complete();
   }

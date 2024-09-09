@@ -4,5 +4,5 @@ export interface User{
   uuid:string,
   profileUrl?:string,
   email:string,
-  role:string
+  isAdmin:string
 }

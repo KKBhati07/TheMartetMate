@@ -1,1 +1,45 @@
-<h1>HEader</h1>
+<div class="header-container w-100p h-56">
+  <div *ngIf="true" class="header h-92 position-absolute br-8 flex-row align-i-center justify-content-space-b pr-16 pl-16">
+    <img [src]="CONSTANTS.LOGO.TRANSPARENT" class="w-132 h-132" alt="app_logo">
+    <div class="right-section flex-row align-i-center gap-20 w-300 h-100p">
+      <ng-container *ngIf="isAuthenticated">
+          <div
+            [ngClass]="!renderIcon?'styles_ri':''"
+            class=" profile-pic-container border-circle align-i-center justify-content-center flex-row w-40 h-40">
+            <img *ngIf="!renderIcon; else renderIconTemplate" [src]="user?.profileUrl">
+          </div>
+      </ng-container>
+
+      <div *ngIf="isRootPage && !isLoading" class="ls-option-container-c h-40 align-i-center flex-row justify-content-space-b">
+        <div class="ls-option-content l-s-o-i-i flex-row align-i-center pl-4 gap-8">
+          <mat-icon class="ls-option-icon cursor-pointer fs-32 h-32 w-32" [fontIcon]="'category'"></mat-icon>
+          <p class="ls-option-text cursor-pointer fw-7">CATEGORY</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<ng-template #loginSignupTemplate>
+  <div
+    (click)="onNavigationClick('login')"
+    class=" ls-option-container l-s-o-i-i h-40 align-i-center flex-row justify-content-space-b">
+    <div class="ls-option-content flex-row align-i-center gap-8 pl-4">
+      <mat-icon class="ls-option-icon cursor-pointer fs-32 h-32 w-32" [fontIcon]="'login'"></mat-icon>
+      <p class="ls-option-text cursor-pointer fw-7">LOGIN</p>
+    </div>
+  </div>
+  <div (click)="onNavigationClick('signup')"
+       class="ls-option-container l-s-o-i-i h-40 align-i-center flex-row justify-content-space-b">
+    <div class="ls-option-content justify-content-space-b flex-row align-i-center pl-4 gap-8">
+      <mat-icon class="ls-option-icon cursor-pointer fs-32 h-32 w-32" [fontIcon]="'person_add'"></mat-icon>
+      <p class="ls-option-text cursor-pointer fw-7 ">SIGNUP</p>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #renderIconTemplate>
+  <mat-icon class=" profile-pic-icon ls-option-icon cursor-pointer fs-32 h-32 w-32" [fontIcon]="'account_circle'"></mat-icon>
+</ng-template>

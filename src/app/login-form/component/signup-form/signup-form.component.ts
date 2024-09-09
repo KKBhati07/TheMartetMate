@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, Input} from "@angular/core";
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, Input, OnDestroy, OnInit} from "@angular/core";
 import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {PasswordValidator} from "./validator";
@@ -13,7 +13,7 @@ import {MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef} from "@angular/material/bottom
   styleUrls: ["./signup-form.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SignupFormComponent {
+export class SignupFormComponent implements OnInit {
 
   renderComponent = false;
   formHeading = 'Signup to MM!'
@@ -60,7 +60,7 @@ export class SignupFormComponent {
 
   closeForm() {
     this.signUpForm.reset();
-    this.router.navigate([URLS.HOME]).then(r=>null)
+    this.router.navigate([URLS.ROOT]).then(r=>null)
   }
 
   onNextClick() {
@@ -132,30 +132,23 @@ export class SignupFormComponent {
 
   onSubmit() {
     if(this.signUpForm.valid){
-    const {name, email, pass} = this.signUpForm.value
+    const {name, email, password} = this.signUpForm.value
 
     const confirmationPass = this.signUpForm.get('confirmPassword')?.value;
-    if (pass !== confirmationPass) {
+    if (password !== confirmationPass) {
       //TODO :: Implement notification service
       // return;
     }
-    if (name && email && pass) {
-
-      console.warn(name)
-      console.warn(email)
-      console.warn(pass)
+    if (name && email && password) {
       this.authService.signupUser({
-        name, email, password: pass
+        name, email, password
       }).subscribe(res => {
-        console.warn(res);
         if (res.isSuccessful()) {
           const data = res.body?.data;
           if (data) {
-            console.warn(res.body.data)
-            console.warn(res.body);
             if (data.created) {
               // Notification Service
-              this.router.navigate([URLS.AUTH.LOGIN.split('/')])
+              this.router.navigate(URLS.AUTH.LOGIN.split(URLS.ROOT)).then(r=>null);
             } else if (!data.created && data.already_exists) {
               //Notifiy user
             } else {

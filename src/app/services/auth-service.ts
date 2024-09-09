@@ -6,6 +6,7 @@ import {Login, Signup} from "../models/login-signup.model";
 import {ApiHttpResponse} from "../app-util/api-response.util";
 import {ApiResponse} from "../models/api-response.model";
 import {CookieService} from "ngx-cookie-service";
+import {User} from "../models/user.model";
 
 
 @Injectable({
@@ -13,7 +14,7 @@ import {CookieService} from "ngx-cookie-service";
 })
 export class AuthService {
 
-  private userDetails: any;
+  private userDetails: User | null = null;
   private isAuthenticated: boolean = false;
 
   constructor(private apiService: ApiService,private cookieService: CookieService) {
@@ -25,7 +26,7 @@ export class AuthService {
       tap(res => {
         if (res.isSuccessful()) {
           this.isAuthenticated = res.body?.data?.is_authenticated || false;
-          this.userDetails = res.body?.data?.userDetails;
+          this.userDetails = res.body?.data?.user_details;
         }
       })
     );
@@ -39,8 +40,7 @@ export class AuthService {
     return this.apiService.post<ApiResponse>(URLS.API.V1.AUTH.LOGIN, body).pipe(tap(res => {
       if (res.isSuccessful()) {
         if (res.body?.data?.authenticated) {
-          console.warn('=>',res.body?.data);
-          this.cookieService.set('sessionid',res.body.data?.sessionId);
+          this.cookieService.set('sessionid',res.body.data?.sessionId,undefined,'/');
           this.userDetails = res.body?.data?.user_details;
           this.isAuthenticated = true;
         }
@@ -48,12 +48,12 @@ export class AuthService {
     }))
   }
 
-  get Authenticated() {
+  get Authenticated(): boolean {
     return this.isAuthenticated
   }
 
 
-  get UserDetails() {
+  get UserDetails(): User | null {
     return this.userDetails;
   }
 
