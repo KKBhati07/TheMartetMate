@@ -23,5 +23,5 @@ export function getLoginContainer() {
   ],
   exports: [LoginFormComponent, SignupFormComponent],
 })
-export class LoginSignupFormModule {
+export class FormsModule {
 }

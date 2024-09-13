@@ -4,14 +4,16 @@
   background-color: var(--primary-color);
 
   .header {
+    transition: height 0.5s ease;
     background-color: var(--header-color);
     width: calc(100% - 40px);
     border: 1px solid var(--border-color);
     top: 20px;
     left: 20px;
 
-    .right-section {
-      flex-direction: row-reverse;
+    .upper-container{
+      .right-section {
+        flex-direction: row-reverse;
         .profile-pic-container {
           &.styles{
             border: 1px solid red;
@@ -19,52 +21,57 @@
           }
         }
 
-      .ls-option-container {
-        border-radius: 20px;
-        overflow: hidden;
-        transition: width 200ms ease-in-out;
-        width: 40px;
+        .ls-option-container {
+          border-radius: 20px;
+          overflow: hidden;
+          transition: width 200ms ease-in-out;
+          width: 40px;
 
-        &:hover {
-          width: 104px;
-        }
+          .ls-option-icon {
+            color: var(--primary-color);
+          }
 
-        .ls-option-icon {
-          color: var(--primary-color);
-        }
+          .ls-option-text {
+            color: var(--primary-color);
 
-        .ls-option-text {
-          color: var(--primary-color);
+          }
 
         }
-
-      }
-      .l-s-o-i-i {
-
-      }
-
-
-      .ls-option-container-c {
-        overflow: hidden;
-        transition: width 200ms ease-in-out;
-        width: 40px;
-
-        &:hover {
-          width: 140px;
+        .categories-hover{
+          &:hover {
+            width: 140px;
+          }
         }
 
-        .ls-option-icon {
-          color: var(--primary-color);
+        .icons-hover{
+          &:hover {
+            width: 104px;
+          }
         }
-
-        .ls-option-text {
-          color: var(--primary-color);
-
+        .l-s-o-i-i {
         }
       }
-
     }
 
+    .expanded-container{
+      overflow: hidden;
+      transition: height 500ms ease;
+      .expanded-profile-container{
+        flex-direction: row-reverse;
+        .name-logout-container{
+          p{
+            text-align: end;
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 969px) {
+    .header{
+      left: 10px;
+      width: calc(100% - 20px);
+    }
   }
 }
 

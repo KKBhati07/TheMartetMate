@@ -1,5 +1,5 @@
 export const URLS = {
-  ROOT:'/',
+  ROOT:'',
   HOME: 'home/',
   AUTH: {
     LOGIN: 'auth/user_login',
@@ -17,6 +17,9 @@ export const URLS = {
         LOGOUT: 'v1/auth/logout',
         AUTH_DETAILS: 'v1/auth/auth_details'
       },
+      CATEGORY: {
+        GET_ALL: 'v1/category/get_all',
+      }
     }
   }
 }
