@@ -1,6 +1,6 @@
 export const URLS = {
   ROOT:'',
-  HOME: 'home/',
+  HOME: 'home',
   AUTH: {
     LOGIN: 'auth/user_login',
     SIGNUP: 'auth/user_signup',

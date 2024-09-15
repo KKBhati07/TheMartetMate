@@ -14,9 +14,9 @@ export const CONSTANTS = {
     CAR:'cars',
     BIKE:'bikes',
     MOBILE: 'mobile_phones',
-    ELECTRONIC:'electronics',
+    ELECTRONIC:'electronic',
     FURNITURE:'furniture',
-    PROPERTY:'properties',
+    PROPERTY:'property',
     OTHER:'others'
   },
   CATEGORY_ICON:{

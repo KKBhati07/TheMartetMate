@@ -48,6 +48,16 @@ export class AuthService {
     }))
   }
 
+  logoutUser():Observable<ApiHttpResponse<ApiResponse>>{
+    return this.apiService.get<ApiResponse>(URLS.API.V1.AUTH.LOGOUT).pipe(tap(res => {
+      if (res.isSuccessful()) {
+        if(res.body?.data?.status === 2000){
+          this.cookieService.delete('sessionid');
+        }
+      }
+    }))
+  }
+
   get Authenticated(): boolean {
     return this.isAuthenticated
   }

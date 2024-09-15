@@ -11,13 +11,16 @@
     top: 20px;
     left: 20px;
 
+    &.height-90{
+      height: 90%;
+    }
+
     .upper-container{
       .right-section {
         flex-direction: row-reverse;
         .profile-pic-container {
           &.styles{
             border: 1px solid red;
-
           }
         }
 
@@ -48,14 +51,16 @@
             width: 104px;
           }
         }
-        .l-s-o-i-i {
-        }
       }
     }
 
     .expanded-container{
       overflow: hidden;
       transition: height 500ms ease;
+
+      &.h-90p{
+        height: 90%;
+      }
       .expanded-profile-container{
         flex-direction: row-reverse;
         .name-logout-container{
@@ -63,6 +68,10 @@
             text-align: end;
           }
         }
+      }
+      .expanded-cat-container{
+        flex-wrap: wrap;
+        overflow: scroll;
       }
     }
   }

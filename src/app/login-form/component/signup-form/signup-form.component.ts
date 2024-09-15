@@ -148,7 +148,7 @@ export class SignupFormComponent implements OnInit {
           if (data) {
             if (data.created) {
               // Notification Service
-              this.router.navigate(URLS.AUTH.LOGIN.split(URLS.ROOT)).then(r=>null);
+              this.router.navigate(URLS.AUTH.LOGIN.split('/')).then(r=>null);
             } else if (!data.created && data.already_exists) {
               //Notifiy user
             } else {

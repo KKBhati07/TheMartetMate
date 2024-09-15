@@ -2,7 +2,7 @@
   top: 0;
   border: 1px solid rgba(0, 0, 0, 0);
   border-top-left-radius: 20px;
-  background-color: var(--background-color);
+  background-color: var(--header-color);
   transition: all 0.5s linear;
 
   .back-icon-container{
@@ -84,7 +84,6 @@
         text-decoration: underline;
         &:hover{
           color: var(--hover-color);
-
         }
       }
     }

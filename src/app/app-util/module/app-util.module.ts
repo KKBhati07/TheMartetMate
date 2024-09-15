@@ -9,7 +9,8 @@ import {ProductCategoryComponent} from "./component/product-category/product-cat
   declarations: [AppButtonComponent,BottomSheetPillComponent,ProductCategoryComponent],
   exports: [
     AppButtonComponent,
-    BottomSheetPillComponent
+    BottomSheetPillComponent,
+    ProductCategoryComponent
   ],
   imports: [CommonModule, MatIcon]
 })

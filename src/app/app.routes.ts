@@ -3,9 +3,11 @@ import {FormContainerComponent} from "./forms-container/form-container/form-cont
 import {URLS} from "./urls";
 import {AuthGuard} from "./app-util/auth-guard";
 import {AppRootComponent} from "./app-root/components/app-root.component";
+import {HomeComponent} from "./app-root/components/home-component/home.component";
 
 export const routes: Routes = [
   { path: URLS.ROOT, component: AppRootComponent },
+  { path: URLS.HOME, component: HomeComponent },
   {
     path: URLS.AUTH.LOGIN,
     component: FormContainerComponent,

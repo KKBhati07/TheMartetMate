@@ -17,10 +17,8 @@ import {CategoryService} from "../../services/category.service";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppHeaderComponent implements OnInit{
-  categories:String[]=[]
-
+  categories:string[]=[]
   protected readonly CONSTANTS = CONSTANTS;
-
   isMobile = false;
 
   isAuthenticated$ = new BehaviorSubject<boolean>(false);
@@ -40,14 +38,38 @@ export class AppHeaderComponent implements OnInit{
   ngOnInit() {
     this.checkForAuthenticationAndSetUser();
     this.setIsMobile()
-    this.getCategories();
+  }
+
+  onLogOutClick(){
+    this.authService.logoutUser().subscribe(res=>{
+      if(res.isSuccessful()){
+        console.warn(res.body)
+        if(res.body?.data?.status === 200){
+          this.router.navigate([URLS.ROOT]).then(r=>{
+            window.location.reload();
+          });
+        }else{
+          //TODO:: Notification Service for failed logout!
+        }
+      }
+    })
+  }
+
+  onCategoryAndHomeClick(category:any=''){
+    const queryParams = category? {queryParams:{category}} : {}
+    this.router.navigate([URLS.HOME],queryParams).then(r=>{
+      this.expandProfile = false;
+      this.expandedCategories = false;
+      this.renderExpandedContent = false
+      this.cdr.markForCheck();
+    });
   }
 
   getCategories(){
     this.categoryService.getCategories().subscribe(res=>{
-      console.warn(res)
       if(res.isSuccessful()){
-        this.categories = res.body?.data ?? [];
+        this.categories = res.body?.data?.categories ?? [];
+        this.cdr.markForCheck();
       }
     })
   }
@@ -69,7 +91,7 @@ export class AppHeaderComponent implements OnInit{
   onNavigationClick(redirectTo:Redirect){
     if(!redirectTo) return;
     if(redirectTo === 'login'){
-      this.router.navigate(URLS.AUTH.LOGIN.split('/')).then(r=>null)
+      this.router.navigate(URLS.AUTH.LOGIN.split('/'),{queryParams:{redirect:this.router.url}}).then(r=>null)
     }else if(redirectTo === 'signup'){
       this.router.navigate(URLS.AUTH.SIGNUP.split('/')).then(r=>null)
     }
@@ -92,6 +114,7 @@ export class AppHeaderComponent implements OnInit{
     }else{
       this.expandProfile = false;
       this.expandedCategories = true;
+      this.getCategories();
     }
     this.cdr.markForCheck();
   }

@@ -93,7 +93,9 @@ export class LoginFormComponent implements OnInit, OnDestroy {
     }
     const {email, password} = this.loginForm.value;
     this.authService.loginUser({email, password}).pipe(takeUntil(this.destroy$)).subscribe(res=>{
-    // TODO::Notification Service
+      // TODO::Notification Service
+      const redirectUrl = this.route.snapshot.queryParamMap.get('redirect');
+      this.router.navigateByUrl(redirectUrl||URLS.ROOT).then(r=>{window.location.reload();});
     })
 
 
