@@ -68,7 +68,7 @@
 <ng-template #expandedProfileTemplate>
   <div class=" expanded-profile-container mt-20 w-100p h-100p flex-row">
     <div class="h-100p gap-10 name-logout-container flex-column ">
-      <p class="fw-8 cursor-pointer fs-20 w-100p "> {{ user?.name?.toUpperCase() || 'USER' }} </p>
+      <p (click)="onUsernameClick()" class="fw-8 cursor-pointer fs-20 w-100p "> {{ user?.name?.toUpperCase() || 'USER' }} </p>
       <p  (click)="onLogOutClick()" class="fw-7 cursor-pointer fs-14 w-100p">LOG OUT</p>
     </div>
   </div>

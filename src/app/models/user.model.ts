@@ -6,3 +6,11 @@ export interface User{
   email:string,
   isAdmin:string
 }
+
+export interface ProfileDetails{
+  name: string;
+  email: string;
+  uuid:string;
+  profileUrl?:string;
+  self?: boolean;
+}

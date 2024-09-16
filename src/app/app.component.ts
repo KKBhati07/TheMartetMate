@@ -5,6 +5,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {AppHeaderModule} from "./app-header/app-header.module";
 import {FormsContainerModule} from "./forms-container/forms-container.module";
 import {MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef} from "@angular/material/bottom-sheet";
+import {UserProfileModule} from "./user-profile/user-profile.module";
 
 @Component({
   selector: 'app-root',
@@ -12,6 +13,7 @@ import {MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef} from "@angular/material/bottom
   imports: [
     RouterOutlet, HttpClientModule, AppHeaderModule,
     FormsContainerModule,
+    UserProfileModule
   ],
   providers: [
     { provide: MAT_BOTTOM_SHEET_DATA, useValue: {} },

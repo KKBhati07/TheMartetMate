@@ -39,6 +39,22 @@ export class AppHeaderComponent implements OnInit{
     this.checkForAuthenticationAndSetUser();
     this.setIsMobile()
   }
+  onUsernameClick(){
+    const uuid = this.authService.UserDetails?.uuid;
+    if(!uuid) return;
+    this.router.navigate(
+      [URLS.USER.USER_PROFILE(uuid)]
+    ).then(r=>{
+      this.closeHeader();
+    });
+  }
+
+  closeHeader(){
+    this.expandProfile = false;
+    this.expandedCategories = false;
+    this.renderExpandedContent = false
+    this.cdr.markForCheck();
+  }
 
   onLogOutClick(){
     this.authService.logoutUser().subscribe(res=>{
@@ -58,10 +74,7 @@ export class AppHeaderComponent implements OnInit{
   onCategoryAndHomeClick(category:any=''){
     const queryParams = category? {queryParams:{category}} : {}
     this.router.navigate([URLS.HOME],queryParams).then(r=>{
-      this.expandProfile = false;
-      this.expandedCategories = false;
-      this.renderExpandedContent = false
-      this.cdr.markForCheck();
+      this.closeHeader();
     });
   }
 
