@@ -1,16 +1,17 @@
-export interface User{
-  id:number,
-  name:string,
-  uuid:string,
-  profileUrl?:string,
-  email:string,
-  isAdmin:string
+export interface User {
+  id: number,
+  name: string,
+  uuid: string,
+  profileUrl?: string,
+  email: string,
+  isAdmin: string
 }
 
-export interface ProfileDetails{
+export interface ProfileDetails {
   name: string;
   email: string;
-  uuid:string;
-  profileUrl?:string;
+  uuid: string;
+  profileUrl?: string;
   self?: boolean;
+  contactNo?: string;
 }

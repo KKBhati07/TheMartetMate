@@ -1,27 +1,14 @@
-.main-container{
+.main-container {
   height: calc(100vh - 56px);
   //background-color: #b21010;
 
-  .left-section{
+  .left-section {
     background-color: forestgreen;
     width: calc(70% - 1px);
   }
-  .divider{
-    height: calc(100vh - 20px);
-    width: 1px;
-    background-color: red;
-  }
-  .right-section{
+
+  .right-section {
     width: 30%;
     height: 100%;
-    border: 1px solid forestgreen;
-    .profile-details-container{
-      width: 80%;
-      height: 85%;
-      border: 1px solid red;
-      .profile-pic-container{
-        border:1px solid black
-      }
-    }
   }
 }
